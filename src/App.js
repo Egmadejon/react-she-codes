@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Forecast from "./Forecast";
+import WeeklyForecast from "./WeeklyForecast";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>
+          Weather app{" "}
+          <img
+            className="header-img"
+            src="http://media.idownloadblog.com/wp-content/uploads/2013/12/iOS-7-weather-app-icon.png"
+            width="50px"
+            alt=""
+          ></img>
+        </h1>{" "}
       </header>
+      <div part="page-body" className="container-fluid">
+        <Forecast />
+        <WeeklyForecast />
+      </div>
     </div>
   );
 }

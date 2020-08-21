@@ -1,0 +1,24 @@
+.city-name {
+  padding: 20px;
+  font-size: 50px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding-top: 0.5em;
+  padding-bottom: 0.2em;
+}
+.temperature {
+  color: black;
+  opacity: 0.5;
+  font-size: 50px;
+}
+section {
+  margin-left: 6em;
+  border: 1px solid rgb(94, 120, 176);
+  padding: 40px;
+  border-radius: 7px;
+}
