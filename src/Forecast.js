@@ -5,7 +5,18 @@ import "./Forecast.css";
 
 export default function Forecast() {
   const [city, setCity] = useState(null);
-  function handleRequest(response) {}
+  const [temperature, setTemperature] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [humidity,setHumidity] = useState(null)
+  const[wind, setWind] = useState(null)
+  const[feelsLike, setFeelsLike] = useState(null)
+  function handleRequest(response) {
+    setTemperature(Math.round(response.data.main.temp));
+    setDescription(response.data.weather.[0].description);
+    setHumidity(response.data.main.humidity)
+    setWind(response.data.wind.speed)
+    setFeelsLike(response.data.te)
+  }
   function handleSubmit(event) {
     event.preventDefault();
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=37bf5a036b50f06a7335705f522feed4&units=metric`;
@@ -36,11 +47,11 @@ export default function Forecast() {
       </div>
       <h2 className="city-name">
         {" "}
-        New York <Icons />
+        {city} <Icons />
       </h2>
 
       <section name="city-temperature" className="row">
-        <h2 className="temperature">20°</h2>
+        <h2 className="temperature">{temperature}°</h2>
         <h2>C|F</h2>
         <ul>
           <li>
@@ -49,17 +60,17 @@ export default function Forecast() {
           <li>
             <strong>Last update: </strong>10:30h
           </li>
-          <li>Cloudy</li>
+          <li>{description}</li>
         </ul>
         <ul>
           <li>
-            <strong>Humidity:</strong>
+            <strong>Humidity: </strong>{humidity}%
           </li>
           <li>
-            <strong>Wind:</strong>
+  <strong>Wind:</strong> {wind} km/h
           </li>
           <li>
-            <strong> Feels like:</strong>{" "}
+            <strong> Feels like:</strong>{feelsLike}
           </li>
         </ul>
       </section>
