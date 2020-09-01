@@ -19,7 +19,7 @@ function App() {
       </header>
       <div part="page-body" className="container-fluid">
         <Forecast />
-        <WeeklyForecast />
+        <WeeklyForecast city={Forecast.city} />
       </div>
     </div>
   );

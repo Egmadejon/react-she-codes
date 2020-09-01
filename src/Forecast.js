@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import Icons from "./icons.js";
 import axios from "axios";
+import Date from "./date.js";
+
 import "./Forecast.css";
 
 export default function Forecast() {
+  const [ready, setReady] = useState(true);
+  const [forecast, setForecast] = useState({});
   const [city, setCity] = useState(null);
-  const [temperature, setTemperature] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [humidity,setHumidity] = useState(null)
-  const[wind, setWind] = useState(null)
-  const[feelsLike, setFeelsLike] = useState(null)
   function handleRequest(response) {
-    setTemperature(Math.round(response.data.main.temp));
-    setDescription(response.data.weather.[0].description);
-    setHumidity(response.data.main.humidity)
-    setWind(response.data.wind.speed)
-    setFeelsLike(response.data.te)
+    setReady(true);
+    setForecast({
+      temperature: Math.round(response.data.main.temp),
+      description: response.data.weather[0].description,
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+    });
   }
   function handleSubmit(event) {
     event.preventDefault();
@@ -26,54 +27,58 @@ export default function Forecast() {
   function updateCity(event) {
     setCity(event.target.value);
   }
-  return (
-    <div className="page-body">
-      <div>
-        <div className="row">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Search for a city 🔍"
-              autoComplete="off"
-              autoFocus="on"
-              onChange={updateCity}
-            />
-            <input type="submit" value="Search" />
-          </form>
-          <button type="button" className="btn btn-primary btn-sm">
-            Current location{" "}
-          </button>
+  if (ready) {
+    return (
+      <div className="page-body">
+        <div>
+          <div className="row">
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Search for a city 🔍"
+                autoComplete="off"
+                autoFocus="on"
+                onChange={updateCity}
+              />
+              <input type="submit" value="Search" />
+            </form>
+            <button type="button" className="btn btn-primary btn-sm">
+              Current location{" "}
+            </button>
+          </div>
         </div>
-      </div>
-      <h2 className="city-name">
-        {" "}
-        {city} <Icons />
-      </h2>
+        <br />
+        <Date />
+        <h2 className="city-name">
+          {" "}
+          {city} <Icons />
+        </h2>
 
-      <section name="city-temperature" className="row">
-        <h2 className="temperature">{temperature}°</h2>
-        <h2>C|F</h2>
-        <ul>
-          <li>
-            <strong>Date: </strong>Monday 10th August
-          </li>
-          <li>
-            <strong>Last update: </strong>10:30h
-          </li>
-          <li>{description}</li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Humidity: </strong>{humidity}%
-          </li>
-          <li>
-  <strong>Wind:</strong> {wind} km/h
-          </li>
-          <li>
-            <strong> Feels like:</strong>{feelsLike}
-          </li>
-        </ul>
-      </section>
-    </div>
-  );
+        <section name="city-temperature" className="row">
+          <h2 className="temperature">{forecast.temperature}°</h2>
+          <h2>C|F</h2>
+          <ul>
+            <li>
+              <strong>Date: </strong>
+            </li>
+            <li>
+              <strong>Last update: </strong>10:30h
+            </li>
+            <li>{forecast.description}</li>
+          </ul>
+          <ul>
+            <li>
+              <strong>Humidity: </strong>
+              {forecast.humidity}%
+            </li>
+            <li>
+              <strong>Wind:</strong> {forecast.wind} km/h
+            </li>
+          </ul>
+        </section>
+      </div>
+    );
+  } else {
+    return "Looking throught the window(so you don't have to), wait...";
+  }
 }

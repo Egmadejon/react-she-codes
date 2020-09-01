@@ -1,3 +1,9 @@
 div {
   max-width: auto;
 }
+.weeklyForecast {
+  text-align: center;
+}
+.following-days-header {
+  font-family: "EB Garamond", serif;
+}
