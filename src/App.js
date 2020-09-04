@@ -18,8 +18,7 @@ function App() {
         </h1>{" "}
       </header>
       <div part="page-body" className="container-fluid">
-        <Forecast />
-        <WeeklyForecast city={Forecast.city} />
+        <Forecast city="" />
       </div>
     </div>
   );

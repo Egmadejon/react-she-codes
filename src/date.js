@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function showDate(props) {
   var dateFormat = require("dateformat");
   var now = new Date();

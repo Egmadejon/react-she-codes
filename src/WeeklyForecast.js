@@ -3,12 +3,12 @@ import axios from "axios";
 
 import "./WeeklyForecast.css";
 
-export default function (props) {
+export default function WeeklyForecast(props) {
   function weeklyForecast(response) {
-    console.log(response.data);
+    alert(response.data);
   }
-  let ApiKey = "37bf5a036b50f06a7335705f522";
-  let url = `http://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=${ApiKey}`;
+
+  let url = `http://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=37bf5a036b50f06a7335705f522feed4&units=metric`;
   axios.get(url).then(weeklyForecast);
 
   return (

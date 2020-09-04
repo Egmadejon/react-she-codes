@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Icons from "./icons.js";
 import axios from "axios";
 import Date from "./date.js";
+import Temperature from "./temperature.js";
+import Hour from "./hour.js";
+import WeeklyForecast from "./WeeklyForecast";
 
 import "./Forecast.css";
 
@@ -25,6 +28,7 @@ export default function Forecast() {
   }
 
   function updateCity(event) {
+    event.preventDefault();
     setCity(event.target.value);
   }
   if (ready) {
@@ -55,14 +59,13 @@ export default function Forecast() {
         </h2>
 
         <section name="city-temperature" className="row">
-          <h2 className="temperature">{forecast.temperature}°</h2>
-          <h2>C|F</h2>
+          <h2>
+            <Temperature celsius={forecast.temperature} />
+          </h2>
           <ul>
             <li>
-              <strong>Date: </strong>
-            </li>
-            <li>
-              <strong>Last update: </strong>10:30h
+              <strong>Last update: </strong>
+              <Hour />
             </li>
             <li>{forecast.description}</li>
           </ul>
@@ -76,6 +79,8 @@ export default function Forecast() {
             </li>
           </ul>
         </section>
+        <br />
+        <WeeklyForecast />
       </div>
     );
   } else {
