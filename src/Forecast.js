@@ -44,9 +44,6 @@ export default function Forecast() {
               />
               <input type="submit" value="Search" />
             </form>
-            <button type="button" className="btn btn-primary btn-sm">
-              Current location{" "}
-            </button>
           </div>
         </div>
         <br />
